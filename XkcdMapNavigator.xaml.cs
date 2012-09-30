@@ -20,7 +20,7 @@ namespace XkcdMap
     public partial class XkcdMapNavigator : UserControl
     {
         private List<XkcdTileMap> _mapsByZoomLevel;
-        private byte _zoomLevel = 0;
+        private sbyte _zoomLevel = 0;
         private bool _moving = false;
         private Point _mapOrigin;
         private Point _mouseOrigin;
@@ -30,7 +30,7 @@ namespace XkcdMap
             InitializeComponent();
 
             _mapsByZoomLevel = Enumerable.Range(0, 7).Select(i => new XkcdTileMap(i)).ToList();
-            
+
             MapControl.TileMap = new XkcdTileMap(0);
             MapControl.Top = 25720;
             MapControl.Left = 67644;
@@ -82,7 +82,7 @@ namespace XkcdMap
 
         private void UserControl_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            ZoomIn(GetCenter());
+            ZoomIn(GetMousePosOnMap());
         }
 
         private Point GetCenter()
@@ -91,12 +91,37 @@ namespace XkcdMap
                              MapControl.Top + this.ActualHeight / 2);
         }
 
+        private Point GetMousePosOnMap()
+        {
+            var mousePos = Mouse.GetPosition(this);
+
+            return new Point(MapControl.Left + mousePos.X,
+                             MapControl.Top + mousePos.Y);
+        }
+
         private void ZoomIn(Point center)
         {
+            if (_zoomLevel > 0)
+            {
+                CommonZoom(-1, new Point(center.X * 2, center.Y * 2));
+            }
         }
 
         private void ZoomOut(Point center)
         {
+            if (_zoomLevel < (_mapsByZoomLevel.Count - 1))
+            {
+                CommonZoom(1, new Point(center.X / 2, center.Y / 2));
+            }
+        }
+
+        private void CommonZoom(sbyte delta, Point newCenter)
+        {
+            _zoomLevel += delta;
+
+            MapControl.TileMap = _mapsByZoomLevel[_zoomLevel];
+            MapControl.Top = (int)(newCenter.Y - this.ActualHeight / 2);
+            MapControl.Left = (int)(newCenter.X - this.ActualWidth / 2);
         }
     }
 }
