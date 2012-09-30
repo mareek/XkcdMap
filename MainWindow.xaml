@@ -1,0 +1,12 @@
+﻿<Window x:Class="XkcdMap.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:local="clr-namespace:XkcdMap"
+        Title="MainWindow" Height="500" Width="800">
+    <DockPanel>
+        <Grid DockPanel.Dock="Bottom">
+            <Button Click="Button_Click">Yeah !</Button>
+        </Grid>
+        <local:XkcdMapNavigator/>
+    </DockPanel>
+</Window>

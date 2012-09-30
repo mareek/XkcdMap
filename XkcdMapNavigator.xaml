@@ -1,0 +1,20 @@
+﻿<UserControl x:Class="XkcdMap.XkcdMapNavigator"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             xmlns:local="clr-namespace:XkcdMap"
+             d:DesignHeight="300" d:DesignWidth="300"
+             MouseDown="UserControl_MouseDown"
+             MouseUp="UserControl_MouseUp"
+             MouseMove="UserControl_MouseMove"
+             MouseWheel="UserControl_MouseWheel"
+             MouseDoubleClick="UserControl_MouseDoubleClick"
+             Background="Transparent"
+             ClipToBounds="True">
+    <Grid>
+        <local:XkcdMapControl x:Name="MapControl"/>
+        <Label x:Name="DebugLabel" Height="30" Width="150" VerticalAlignment="Bottom" HorizontalAlignment="Right" Background="Bisque" />
+    </Grid>
+</UserControl>
