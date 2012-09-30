@@ -70,12 +70,33 @@ namespace XkcdMap
 
         private void UserControl_MouseWheel(object sender, MouseWheelEventArgs e)
         {
-            
+            if (e.Delta > 0)
+            {
+                ZoomIn(GetCenter());
+            }
+            else
+            {
+                ZoomOut(GetCenter());
+            }
         }
 
         private void UserControl_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
+            ZoomIn(GetCenter());
+        }
 
+        private Point GetCenter()
+        {
+            return new Point(MapControl.Left + this.ActualWidth / 2,
+                             MapControl.Top + this.ActualHeight / 2);
+        }
+
+        private void ZoomIn(Point center)
+        {
+        }
+
+        private void ZoomOut(Point center)
+        {
         }
     }
 }
