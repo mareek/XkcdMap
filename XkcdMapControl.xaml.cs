@@ -73,8 +73,28 @@ namespace XkcdMap
             InitializeComponent();
         }
 
+        private void UserControl_SizeChanged(object sender, SizeChangedEventArgs e)
+        {
+            InitImages();
+            Refresh();
+        }
+
+        public void SetProperties(int top, int left, XkcdTileMap map)
+        {
+            _refreshing = true;
+
+            this.SetCurrentValue(XkcdMapControl.TopProperty, top);
+            this.SetCurrentValue(XkcdMapControl.LeftProperty, left);
+            this.SetCurrentValue(XkcdMapControl.TileMapProperty, map);
+
+            _refreshing = false;
+
+            Refresh();
+
+        }
+
         private bool _refreshing = false;
-        public void Refresh()
+        private void Refresh()
         {
             if (!_refreshing)
             {
@@ -144,12 +164,6 @@ namespace XkcdMap
 
                 _refreshing = false;
             }
-        }
-
-        private void UserControl_SizeChanged(object sender, SizeChangedEventArgs e)
-        {
-            InitImages();
-            Refresh();
         }
 
         private void InitImages()

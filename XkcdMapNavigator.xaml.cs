@@ -99,11 +99,16 @@ namespace XkcdMap
                              MapControl.Top + mousePos.Y);
         }
 
+        private void UserControl_MouseRightButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            ZoomOut(GetCenter());
+        }
+
         private void ZoomIn(Point center)
         {
             if (_zoomLevel > 0)
             {
-                CommonZoom(-1, new Point(center.X * 2, center.Y * 2));
+                GenericZoom(-1, new Point(center.X * 2, center.Y * 2));
             }
         }
 
@@ -111,17 +116,17 @@ namespace XkcdMap
         {
             if (_zoomLevel < (_mapsByZoomLevel.Count - 1))
             {
-                CommonZoom(1, new Point(center.X / 2, center.Y / 2));
+                GenericZoom(1, new Point(center.X / 2, center.Y / 2));
             }
         }
 
-        private void CommonZoom(sbyte delta, Point newCenter)
+        private void GenericZoom(sbyte delta, Point newCenter)
         {
             _zoomLevel += delta;
 
-            MapControl.TileMap = _mapsByZoomLevel[_zoomLevel];
-            MapControl.Top = (int)(newCenter.Y - this.ActualHeight / 2);
-            MapControl.Left = (int)(newCenter.X - this.ActualWidth / 2);
+            MapControl.SetProperties((int)(newCenter.Y - this.ActualHeight / 2),
+                                     (int)(newCenter.X - this.ActualWidth / 2),
+                                     _mapsByZoomLevel[_zoomLevel]);
         }
     }
 }

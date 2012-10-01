@@ -11,6 +11,7 @@
              MouseMove="UserControl_MouseMove"
              MouseWheel="UserControl_MouseWheel"
              MouseDoubleClick="UserControl_MouseDoubleClick"
+             MouseRightButtonDown="UserControl_MouseRightButtonDown"
              Background="Transparent"
              ClipToBounds="True">
     <Grid>
