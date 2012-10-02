@@ -14,7 +14,8 @@ namespace XkcdMap
     public partial class App : Application
     {
         public const string MergeCommand = "Merge";
-        public static DirectoryInfo BaseDir = new DirectoryInfo(@"C:\temp\xkcd\");
+        public static DirectoryInfo BaseDir = new DirectoryInfo(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData), "XkcdClickAndDrag"));
+        
         private void Application_Startup(object sender, StartupEventArgs e)
         {
             int zoomLevel;

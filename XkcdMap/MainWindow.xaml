@@ -4,9 +4,6 @@
         xmlns:local="clr-namespace:XkcdMap"
         Title="MainWindow" Height="500" Width="800">
     <DockPanel>
-        <Grid DockPanel.Dock="Bottom">
-            <Button Click="Button_Click">Yeah !</Button>
-        </Grid>
         <local:XkcdMapNavigator/>
     </DockPanel>
 </Window>
